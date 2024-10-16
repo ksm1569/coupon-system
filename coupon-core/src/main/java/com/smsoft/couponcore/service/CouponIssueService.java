@@ -30,7 +30,7 @@ public class CouponIssueService {
     @Transactional(readOnly = true)
     public Coupon findCoupon(long couponId) {
         return couponJpaRepository.findById(couponId).orElseThrow(() ->
-            new CouponIssueException(COUPON_NOT_EXIST, "존재하지 않는 쿠폰 입니다. %s".formatted(couponId))
+            new CouponIssueException(COUPON_NOT_EXIST, "존재하지 않는 쿠폰 입니다. couponId : %s".formatted(couponId))
         );
     }
 
