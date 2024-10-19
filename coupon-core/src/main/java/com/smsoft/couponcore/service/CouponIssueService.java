@@ -22,9 +22,9 @@ public class CouponIssueService {
 
     @Transactional
     public void issue(long couponId, long userId) {
-        Coupon coupon = findCoupon(couponId);
-        coupon.issue();
-        saveCouponIssue(couponId, userId);
+            Coupon coupon = findCoupon(couponId);
+            coupon.issue();
+            saveCouponIssue(couponId, userId);
     }
 
     @Transactional(readOnly = true)

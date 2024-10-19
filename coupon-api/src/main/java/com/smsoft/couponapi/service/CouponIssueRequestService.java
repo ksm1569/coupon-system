@@ -14,7 +14,9 @@ public class CouponIssueRequestService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     public void issueRequestV1(CouponIssueRequestDto requestDto) {
-        couponIssueService.issue(requestDto.couponId(), requestDto.userId());
+        synchronized (this) {
+            couponIssueService.issue(requestDto.couponId(), requestDto.userId());
+        }
         logger.info("Issue request completed. couponId: {}, userId: {}", requestDto.couponId(), requestDto.userId());
     }
 }
