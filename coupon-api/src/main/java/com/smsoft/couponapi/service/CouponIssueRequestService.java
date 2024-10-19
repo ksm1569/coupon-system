@@ -12,14 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CouponIssueRequestService {
     private final CouponIssueService couponIssueService;
-    private final DistributeLockExecutor distributeLockExecutor;
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getSimpleName());
 
     public void issueRequestV1(CouponIssueRequestDto requestDto) {
-        distributeLockExecutor.execute("lock_" + requestDto.couponId(), 10000, 10000, () -> {
-            couponIssueService.issue(requestDto.couponId(), requestDto.userId());
-        });
-
+        couponIssueService.issue(requestDto.couponId(), requestDto.userId());
         logger.info("Issue request completed. couponId: {}, userId: {}", requestDto.couponId(), requestDto.userId());
     }
 }
